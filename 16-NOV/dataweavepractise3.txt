@@ -1,0 +1,62 @@
+1)I/p:
+{
+    "country": "91"
+}
+
+o/p:
+"IND"
+"US"
+
+create a function.country is 91 then ind otherwise US
+
+
+
+
+ANS) %dw 2.0
+output application/json
+fun country1(i)=if(i as Number == 91) "ind"
+else
+    "US"
+
+---
+country1(payload.country)
+------------------------------------------------------------------
+2)I/p:
+[{
+    "message": "Hello world!",
+    "city":"hyd"
+},
+{
+    "message": "Hello world1!",
+    "city":"hyd1"
+},
+{
+    "message": "Hello world2!",
+    "city":"hyd2"
+},
+{
+    "message": "Hello world2!",
+    "city":"hyd2"
+}
+] 
+
+o/p:
+[
+  {
+    "message": "Hello world!"
+  },
+  {
+    "message": "Hello world1!"
+  },
+  {
+    "message": "Hello world2!"
+  },
+  {
+    "message": "Hello world2!"
+  }
+]
+
+Dont use map - --
+
+ANS) payload.&message
+-------------------------------------------------------------------
