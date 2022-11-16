@@ -1,0 +1,127 @@
+Input:
+
+[
+  {
+    "name1": "sri",
+    "value1": "one"
+  },
+  {
+    "name1": "sai",
+    "value1": "two"
+  }
+]
+
+Output:
+
+{
+  "sri": "one",
+  "sai": "two"
+}
+
+Dataweave:
+
+%dw 2.0
+output application/json
+---
+payload reduce ((item, accumulator = {}) -> accumulator ++ ((item.name1):(item.value1)))
+
+<---------------------------------->
+
+Input:
+
+[
+  {
+    "stdname": "sri",
+    "college": "vug",
+    "city": "tnl"
+  },
+  {
+    "stdname": "sai",
+    "college": "KLU",
+    "city": "hyd"
+  },
+  {
+    "stdname": "john",
+    "college": "jntu",
+    "city": "vig"
+  },
+  {
+    "stdname": "ooha",
+    "college": "sid",
+    "city": "sid"
+  }
+]
+
+Output:
+
+[
+  {
+    "stdname": "sri",
+    "college": "vug",
+    "city": "tnl",
+    "rollno": 1
+  },
+  {
+    "stdname": "sai",
+    "college": "KLU",
+    "city": "hyd",
+    "rollno": 2
+  },
+  {
+    "stdname": "john",
+    "college": "jntu",
+    "city": "vig",
+    "rollno": 3
+  },
+  {
+    "stdname": "ooha",
+    "college": "sid",
+    "city": "sid",
+    "rollno": 4
+  }
+]
+
+Dataweave:
+
+%dw 2.0
+output application/json
+---
+payload map ((element, index) -> 
+{
+"stdname": element.stdname,
+"college": element.college,
+"city": element.city,
+"rollno": index+1
+})
+
+<---------------------------------->
+Input:
+
+{
+  "name": "sai",
+  "city": "hyd",
+  "dst": "RR"
+}
+
+Output:
+
+[
+  {
+    "name": "sai"
+  },
+  {
+    "city": "hyd"
+  },
+  {
+    "dst": "RR"
+  }
+]
+
+Dataweave:
+
+%dw 2.0
+output application/json
+---
+payload pluck ((value, key, index) -> (key) : value )
+
+<---------------------------------->
